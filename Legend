@@ -1,0 +1,42 @@
+function makeLegend() {
+  var labelPanel = ui.Panel(
+      [
+        ui.Label(Math.round(undoColorStretch(0)), {margin: '4px 8px'}),
+        ui.Label(
+            Math.round(undoColorStretch(0.5)),
+            {margin: '4px 8px', textAlign: 'center', stretch: 'horizontal'}),
+        ui.Label(Math.round(undoColorStretch(1)), {margin: '4px 8px'})
+      ],
+      ui.Panel.Layout.flow('horizontal'));
+  return ui.Panel([ColorBar(POPULATION_STYLE.palette), labelPanel]);
+}
+
+// Styling for the legend title.
+var LEGEND_TITLE_STYLE = {
+  fontSize: '20px',
+  fontWeight: 'bold',
+  stretch: 'horizontal',
+  textAlign: 'center',
+  margin: '4px',
+};
+
+// Styling for the legend footnotes.
+var LEGEND_FOOTNOTE_STYLE = {
+  fontSize: '10px',
+  stretch: 'horizontal',
+  textAlign: 'center',
+  margin: '4px',
+};
+
+// Assemble the legend panel.
+Map.add(ui.Panel(
+    [
+      ui.Label('Population Density', LEGEND_TITLE_STYLE), makeLegend(),
+      ui.Label(
+          '(thousands of people per square kilometer)', LEGEND_FOOTNOTE_STYLE),
+      ui.Label(
+          'Source: Global Human Settlement Layer (JRC)', LEGEND_FOOTNOTE_STYLE),
+      ui.Label('Country boundaries source: USDOS LSIB', LEGEND_FOOTNOTE_STYLE)
+    ],
+    ui.Panel.Layout.flow('vertical'),
+    {width: '230px', position: 'bottom-left'}));
